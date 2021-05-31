@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/uncategorized/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>笔记本安装Centos</title>
+    <url>/Linux/%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%AE%89%E8%A3%85CentOS/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我打算在我的笔记本上安装 CentOS 来玩一玩，这台N650度笔记本基本配置是 i3-8100+8G 内存，因为一直闲置，打算利用起来，系统真正安装在一台物理机上比在虚拟机里折腾带劲多了。</p>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>我下载的版本是 CentOS7，去官网下载的，下载最新的7.9版本，DVD 版。</p>
+<ul>
+<li><a href="https://www.centos.org/download/">https://www.centos.org/download/</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="制作安装盘"><a href="#制作安装盘" class="headerlink" title="制作安装盘"></a>制作安装盘</h1><p>很多人喜欢用软碟通来制作安装盘，但这次我打算先使用 balenaEtcher 这款软件来制作安装盘，这是一款开软软件，GitHub地址如下。</p>
+<ul>
+<li><a href="https://github.com/balena-io/etcher">https://github.com/balena-io/etcher</a></li>
+</ul>
+<h1 id="进入BIOS"><a href="#进入BIOS" class="headerlink" title="进入BIOS"></a>进入BIOS</h1><p>我的这款笔记本是开机的时候按 F2 进入BISO，然后设置U盘启动。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装就安装我之前的安装教程轻车熟路安装来就可以了，不过在物理机上安装，好像不能把网卡设置为 eth0，或许是我没有找到正确的办法。</p>
+<p>还遇到了一个问题，分区的问题，因为原来的硬盘是满的，我不知道如何在 CentOS 安装界面把这块硬盘给格式化。</p>
+<p>后来我参考了这篇教程，才解决了我的分区问题：</p>
+<ul>
+<li><a href="https://jingyan.baidu.com/article/456c463baa77e64a583144e6.html">https://jingyan.baidu.com/article/456c463baa77e64a583144e6.html</a></li>
+</ul>
+<p>当然我没有采用这篇教程的自动分区的办法，我还是手动分区的。</p>
+<p>在安装过程中，还碰到了 <strong>EFI</strong> 的问题，虽然解决了，但还是有必要了解一下 Linux 下的 EFI。</p>
+<h1 id="安装好之后"><a href="#安装好之后" class="headerlink" title="安装好之后"></a>安装好之后</h1><p>因为我是最小化安装，所以还要进行一些必要的优化设置。</p>
+<p>最基本的就是更新 yum 源，更新为阿里云的或者网易163的都可以。</p>
+<p>然后就是额外安装一些有用的软件包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install tree nmap dos2unix lrzsz nc lsof wget tcpdump htop iftop iotop sysstat nethogs -y</span><br><span class="line">yum install psmisc net-tools bash-completion vim-enhanced -y</span><br></pre></td></tr></table></figure>
+
+<p>关于对一些套件的操作，看这里：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum grouplist  列出所有的套件</span><br><span class="line">yum groupinstall    安装套件</span><br><span class="line">yum groupremove   卸载套件</span><br></pre></td></tr></table></figure>
+
+<p>然后就是提示符的美化，具体不说了，这是个秘密。</p>
+<p>算了，还是告诉你们把，修改 <code>/etc/profile</code> 文件或者 <code>/etc/bashrc</code> 文件， <code>/etc/bashrc</code> 文件大概修改41行， <code>/etc/profile</code> 文件在末尾添加一行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[ <span class="string">&quot;<span class="variable">$PS1</span>&quot;</span> = <span class="string">&quot;\\s-\\v\\\$ &quot;</span> ] &amp;&amp; PS1=<span class="string">&quot;[\[\e[34;1m\]\u@\[\e[0m\]\[\e[32;1m\]\H\[\e[0m\]\[\e[31;1m\] \w\[\e[0m\]]\\$ &quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果图如下。</p>
+<img src="/Linux/%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%AE%89%E8%A3%85CentOS/beautify-prompt-sign.png" style="zoom:50%;">
+
+<p>我其实不像把这个写出来的，但，考虑再三，还是记录一下吧。</p>
+<p>作为自己系统的管理员，为了安全起见，我们把 <code>/etc/issue</code> 文件清空，这样别人在登录界面就看不到我们的内核等信息了：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span> &gt; /etc/issue</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们再检查一下 <code>/etc/motd</code> 文件，也可以将里面的内容清空。</p>
+<p>接下来我们对 <code>man</code> 命令进行一些调整，打算替换成 <code>most</code> 命令，<code>most</code> 提供了语法高亮，可以让 <code>man</code> 手册看起来更加舒服：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">shell&gt; yum install most -y</span><br><span class="line">shell&gt; <span class="built_in">export</span> PAGER=most  <span class="comment"># 这是临时生效，永久生效还要修改/etc/profile文件</span></span><br><span class="line"><span class="comment"># 还可以使用以下命令将手册页的宽度限制为一定数量的列，阅读起来更加舒服</span></span><br><span class="line">shell&gt; <span class="built_in">export</span> MANWIDTH=80</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后我们可以安装 LAMP 环境了，直接用脚本自动化安装好了。</p>
+<ul>
+<li><a href="https://lnmp.org/install.html">https://lnmp.org/install.html</a></li>
+</ul>
+<p>我们还要把防火墙和 SELinux 给关闭了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld.service </span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld.service</span><br><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+
+
+<p>接着，还可以干什么呢？</p>
+<p>我觉得还可以把 cmake 升级一下。</p>
+<p>先来看看用 yum 仓库中 cmake 的版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum list cmake</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">Installed Packages</span><br><span class="line">cmake.x86_64                                                         2.8.12.2-2.el7                                                         @base</span><br></pre></td></tr></table></figure>
+
+<p>2.8版本，而cmake官网提供的版本3.19。</p>
+<p>有个问题，Linux 下如何清理垃圾文件呢？或者说是否有必要清理垃圾文件呢？</p>
+<p>还有，对于不是用 yum 安装的软件，怎么删除或者说卸载呢？</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自动备份脚本</title>
+    <url>/uncategorized/%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<p>原文链接：<a href="https://zhidao.baidu.com/question/524104965.html">https://zhidao.baidu.com/question/524104965.html</a></p>
+<p>需求描述：每天凌晨2点备份以一次 /var/www/html/ 的整个目录，自动删除前两天的备份文件</p>
+<p>实现步骤：</p>
+<p>1.新建脚本 backup.sh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#Backup the files</span></span><br><span class="line">tar -zcf /backup/html_$(date -d <span class="string">&quot;today&quot;</span> +<span class="string">&quot;%Y%m%d_%H%M%S&quot;</span>).tar.gz /var/www/html/</span><br><span class="line"><span class="comment">#Delete the files two days before</span></span><br><span class="line">find /backup/ -<span class="built_in">type</span> f -mtime +2 -<span class="built_in">exec</span> rm &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p>2.为backup.sh添加执行权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 755 backup.sh</span><br></pre></td></tr></table></figure>
+
+<p>3.添加计划 crontab -e</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0 2 * * * sh /var/<span class="built_in">test</span>/backup.sh</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+  </entry>
+</search>
